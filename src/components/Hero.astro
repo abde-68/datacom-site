@@ -1,0 +1,20 @@
+---
+import { withBase } from '../utils/paths';
+import { site } from '../data/site';
+interface Props { label: string; title: string; image: string; alt: string; home?: boolean; }
+const { label, title, image, alt, home = false } = Astro.props;
+---
+<section class:list={['hero', { 'hero-home': home }]}>
+  <div class="hero-visual" data-parallax><img src={withBase(`/images/${image}.webp`)} alt={alt} width="1376" height="768" fetchpriority="high" decoding="async" /></div>
+  <div class="hero-wash"></div>
+  <div class="container-page hero-container">
+    <div class="hero-copy">
+      <h1 class="hero-title"><span class="hero-brand" data-hero="1">{label}</span><span data-hero="2">{title}</span></h1>
+      <div class="hero-description" data-hero="3"><slot /></div>
+      <div class="hero-actions" data-hero="4">
+        <a href={withBase('/contact')} class="btn-secondary">Étude et devis gratuits <span aria-hidden="true">↗</span></a>
+        {home && <a href={site.telephoneLien ? `tel:${site.telephoneLien}` : withBase('/contact#coordonnees')} class="hero-call">Appeler maintenant <span aria-hidden="true">↗</span></a>}
+      </div>
+    </div>
+  </div>
+</section>

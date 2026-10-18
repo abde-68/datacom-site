@@ -1,0 +1,10 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+const aRenseigner = 'À renseigner avant la mise en ligne';
+---
+<BaseLayout title="Mentions légales" description="Mentions légales et informations relatives à l’éditeur du site DATACOM SASU.">
+  <section class="section"><div class="container-page legal-content"><p class="eyebrow">Informations légales</p><h1 class="h-title">Mentions légales</h1><p class="mt-6">Éditeur du site : {site.nomLegal}</p><ul>
+    <li>Adresse : {site.adresse || aRenseigner}</li><li>Téléphone : {site.telephone || aRenseigner}</li><li>E-mail : {site.email || aRenseigner}</li><li>SIRET : {site.siret || aRenseigner}</li><li>Responsable de la publication : {site.responsablePublication || aRenseigner}</li><li>Hébergeur : {site.hebergeur || aRenseigner}</li>
+  </ul><p class="contact-note">Ces informations doivent être complétées avec les données légales réelles de l’entreprise avant toute mise en production.</p></div></section>
+</BaseLayout>

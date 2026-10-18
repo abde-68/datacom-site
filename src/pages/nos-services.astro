@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import ExpertiseCard from '../components/ExpertiseCard.astro';
+import ProjectCTA from '../components/ProjectCTA.astro';
+import { expertises } from '../data/services';
+---
+<BaseLayout title="Nos services" description="Électricité, fibre optique et plomberie : les expertises DATACOM pour les particuliers, les professionnels, le dépannage et la maintenance.">
+  <Hero label="Nos services" title="Trois expertises, un seul interlocuteur." image="hero-accueil" alt="Étude de plans techniques sur un bureau clair, avec un casque de chantier et un multimètre."><p>Des <strong>compétences complémentaires</strong> pour vous accompagner dans vos travaux, de l’étude initiale au suivi de vos installations.</p></Hero>
+  <section class="section"><div class="container-page"><div class="section-heading" data-reveal><p class="eyebrow">Notre savoir-faire</p><h2 class="h-title">Des solutions pour chaque projet.</h2><p>Découvrez nos prestations et échangeons sur vos besoins.</p></div><div class="expertise-grid">{expertises.map((s, index) => <ExpertiseCard {...s} index={index} />)}</div></div></section>
+  <section class="section commitments-section"><div class="container-page audience-grid">
+    <article id="particuliers" data-reveal><p class="eyebrow">Pour votre logement</p><h2>Particuliers</h2><p>Construction, rénovation ou amélioration de votre confort : nous adaptons nos interventions à votre habitation et à vos usages.</p></article>
+    <article id="professionnels" data-reveal><p class="eyebrow">Pour votre activité</p><h2>Professionnels</h2><p>Bureaux, commerces ou locaux d’activité : des installations pensées pour votre fonctionnement et vos contraintes techniques.</p></article>
+    <article id="maintenance" data-reveal><p class="eyebrow">Pour votre tranquillité</p><h2>Dépannage et maintenance</h2><p>Une panne ou un besoin d’entretien ? Nous évaluons votre situation et convenons avec vous d’une intervention selon nos disponibilités.</p></article>
+  </div></section><ProjectCTA />
+</BaseLayout>

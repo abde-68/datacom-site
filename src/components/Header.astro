@@ -1,0 +1,30 @@
+---
+import { nav } from '../data/site';
+import { withBase } from '../utils/paths';
+const current = Astro.url.pathname.replace(/\/$/, '');
+const active = (href: string) => current === withBase(href).replace(/\/$/, '');
+---
+<header class="site-header" data-header>
+  <div class="container-page header-inner">
+    <a href={withBase('/')} class="brand" aria-label="DC GROUP — DATACOM, accueil">
+      <img src={withBase('/logo-dc-group.png')} alt="DC GROUP" width="640" height="374" />
+    </a>
+    <nav class="desktop-nav" aria-label="Navigation principale">
+      {nav.map(item => item.children ? (
+        <div class="nav-group">
+          <a href={withBase(item.href)} aria-current={active(item.href) ? 'page' : undefined}>{item.label}</a>
+          <button class="submenu-toggle" aria-label="Afficher les services" aria-expanded="false" aria-controls="services-menu"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m5 7 5 5 5-5" stroke="currentColor" stroke-width="1.6"/></svg></button>
+          <ul class="submenu" id="services-menu">{item.children.map(child => <li><a href={withBase(child.href)} aria-current={active(child.href) ? 'page' : undefined}>{child.label}</a></li>)}</ul>
+        </div>
+      ) : <a href={withBase(item.href)} aria-current={active(item.href) ? 'page' : undefined}>{item.label}</a>)}
+    </nav>
+    <button id="menu-toggle" class="menu-toggle" aria-label="Ouvrir le menu" aria-controls="mobile-menu" aria-expanded="false"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+  </div>
+  <div id="mobile-menu" class="mobile-menu" hidden>
+    <nav class="container-page" aria-label="Navigation mobile">
+      {nav.map(item => item.children ? <div><a href={withBase(item.href)}>{item.label}</a><ul>{item.children.map(child => <li><a href={withBase(child.href)}>{child.label}</a></li>)}</ul></div> : <a href={withBase(item.href)} aria-current={active(item.href) ? 'page' : undefined}>{item.label}</a>)}
+      <a href={withBase('/contact')} class="btn-primary">Demander un devis</a>
+    </nav>
+  </div>
+  <noscript><nav class="nojs-nav container-page" aria-label="Navigation sans JavaScript">{nav.map(item => <a href={withBase(item.href)}>{item.label}</a>)}</nav></noscript>
+</header>

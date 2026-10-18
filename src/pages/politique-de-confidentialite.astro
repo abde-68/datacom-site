@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+---
+<BaseLayout title="Politique de confidentialité" description="Informations sur le traitement des données personnelles et l’exercice de vos droits auprès de DATACOM SASU.">
+  <section class="section"><div class="container-page legal-content"><p class="eyebrow">Vos données personnelles</p><h1 class="h-title">Politique de confidentialité</h1>
+    <p class="mt-6">Lorsque le service d’envoi est activé, les données renseignées dans le formulaire de contact (nom, prénom, e-mail, téléphone, commune, service, urgence, description du besoin et photos éventuelles) sont utilisées pour traiter votre demande de devis et vous recontacter.</p>
+    <h2>Responsable du traitement</h2><p>{site.nomLegal} est responsable du traitement des demandes. {site.email ? `Contact : ${site.email}.` : 'Les coordonnées de contact doivent être renseignées avant l’activation du formulaire.'}</p>
+    <h2>Finalité et base légale</h2><p>Le traitement vise à répondre à votre demande et à préparer un éventuel contrat de prestation. Il repose sur les mesures précontractuelles prises à votre demande. Les informations obligatoires sont signalées dans le formulaire.</p>
+    <h2>Destinataires et conservation</h2><p>Les données sont destinées aux personnes habilitées de DATACOM et, lorsque le formulaire est activé, au prestataire chargé de transmettre les demandes. Le prestataire, les éventuels transferts de données et la durée de conservation doivent être précisés avant l’activation du service.</p>
+    <h2>Vos droits</h2><p>Conformément au RGPD, vous disposez notamment de droits d’accès, de rectification, d’effacement et de limitation du traitement, dans les conditions prévues par la réglementation. Vous pouvez également introduire une réclamation auprès de la CNIL.</p>
+    <h2>Illustrations</h2><p>Les photographies du site sont des illustrations générées par intelligence artificielle. Elles ne présentent pas des membres de l’équipe ni des chantiers réalisés par DATACOM.</p>
+    <p class="contact-note">Cette politique doit être complétée et validée avec les informations réelles de l’entreprise et du service d’envoi avant la mise en production.</p>
+  </div></section>
+</BaseLayout>

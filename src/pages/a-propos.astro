@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import ProjectCTA from '../components/ProjectCTA.astro';
+import { engagements, methode } from '../data/services';
+import { withBase } from '../utils/paths';
+---
+<BaseLayout title="À propos" description="Découvrez l’histoire de DATACOM, ses valeurs et sa méthode : écoute, diagnostic, devis, réalisation et suivi de vos projets.">
+  <Hero label="À propos de DATACOM" title="Une histoire de confiance." image="hero-a-propos" alt="Électricien professionnel souriant sur un chantier moderne, près d’un tableau électrique.">
+    <p>Une conviction nous anime : associer <strong>l’exigence technique</strong> à un <strong>accompagnement humain</strong>, pour construire avec vous des projets durables.</p>
+  </Hero>
+  <section class="section"><div class="container-page story-grid">
+    <div data-reveal><p class="eyebrow">La genèse</p><h2 class="h-title">Du terrain à<br />l’envie d’entreprendre.</h2></div>
+    <div class="story-copy" data-reveal><p>Après plusieurs années d’expérience sur le terrain, un ingénieur en électricité a eu la volonté de créer une entreprise fondée sur la rigueur technique, la proximité et la qualité du service. Son ambition : accompagner chaque client avec des solutions fiables et un suivi à chaque étape.</p><p>Il a ensuite rencontré ses futurs associés, qui partageaient cette même volonté d’entreprendre et cette exigence de qualité. Ensemble, ils ont décidé d’unir leurs compétences et de créer DATACOM : une entreprise à taille humaine, au service des particuliers comme des professionnels.</p><p>Aujourd’hui, cette volonté commune guide chacune de leurs interventions : comprendre chaque besoin, expliquer les solutions et tenir leurs engagements. La confiance de leurs clients reste au cœur de leur démarche.</p></div>
+  </div></section>
+  <section class="section commitments-section"><div class="container-page">
+    <div class="section-heading" data-reveal><p class="eyebrow">Nos valeurs et nos engagements</p><h2 class="h-title">Bien faire. Et le faire ensemble.</h2><p>La proximité, la transparence et la rigueur guident chacune de nos interventions.</p></div>
+    <div class="commitments-grid">{engagements.map(([titre, desc], i) => <article data-reveal style={`--reveal-delay:${i * 100}ms`}><span class="commitment-number" aria-hidden="true">0{i+1}</span><h3>{titre}</h3><p>{desc}</p></article>)}</div>
+  </div></section>
+  <section class="section"><div class="container-page"><div class="section-heading" data-reveal><p class="eyebrow">Notre méthode</p><h2 class="h-title">À vos côtés, du début à la fin.</h2><p>Un parcours clair, un interlocuteur unique et des décisions prises avec vous.</p></div>
+    <ol class="method-grid">{methode.map(([titre, desc], i) => <li data-reveal style={`--reveal-delay:${i * 100}ms`}><span class="step-number">0{i+1}</span><h3>{titre}</h3><p>{desc}</p></li>)}</ol>
+  </div></section>
+  <section class="section about-today"><div class="container-page split-grid">
+    <img src={withBase('/images/carte-electricite.webp')} alt="Câblage soigné d’un tableau électrique moderne par un professionnel." width="1200" height="896" loading="lazy" class="rounded-photo" data-reveal />
+    <div class="story-copy" data-reveal><p class="eyebrow">DATACOM aujourd’hui</p><h2 class="h-title">Plus de compétences.<br />La même exigence.</h2><p>Notre savoir-faire s’est élargi à la fibre optique et à la plomberie pour répondre à des besoins complémentaires et simplifier le quotidien de nos clients.</p><p>Notre ambition reste fidèle à l’esprit des débuts : être un partenaire de proximité, à l’écoute, qui apporte des solutions fiables et durables sans jamais perdre de vue l’essentiel : votre confiance.</p><a href={withBase('/nos-services')} class="text-link">Découvrir nos services <span aria-hidden="true">↗</span></a></div>
+  </div></section>
+  <ProjectCTA />
+</BaseLayout>

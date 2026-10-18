@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import ExpertiseCard from '../components/ExpertiseCard.astro';
+import ProjectCTA from '../components/ProjectCTA.astro';
+import { expertises, engagements } from '../data/services';
+import { withBase } from '../utils/paths';
+---
+<BaseLayout title="L’énergie de vos projets" description="DATACOM accompagne vos projets d’électricité, de fibre optique et de plomberie, de l’étude à la mise en service. Étude et devis gratuits.">
+  <Hero label="DATACOM" title="L’énergie de vos projets !" image="hero-accueil" alt="Mains d’ingénieurs étudiant un plan électrique, avec un casque de chantier et un multimètre sur un bureau clair." home>
+    <p>Nous sommes une <strong>entreprise à taille humaine</strong> qui accompagne particuliers et professionnels avec des <strong>solutions fiables et durables</strong>, du diagnostic à la mise en service.</p>
+  </Hero>
+  <section class="section story-section">
+    <div class="container-page story-grid">
+      <div data-reveal><p class="eyebrow">Notre histoire</p><h2 class="h-title">L’expertise du terrain.<br /><span class="text-electric">L’humain au cœur du projet.</span></h2></div>
+      <div class="story-copy" data-reveal>
+        <p>DATACOM est née de la volonté d’un ingénieur en électricité de créer, après plusieurs années sur le terrain, une entreprise proche de ses clients et exigeante sur la qualité. Il a ensuite rencontré ses futurs associés, animés par la même volonté. Ensemble, ils ont décidé de concrétiser ce projet en fondant DATACOM.</p>
+        <p>Aujourd’hui, nous vous accompagnons avec la même exigence qu’au premier jour. Nos compétences en fibre optique et en plomberie font de DATACOM votre <strong>interlocuteur unique</strong>, à chaque étape de votre projet.</p>
+        <a href={withBase('/a-propos')} class="text-link">Découvrir notre histoire <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </section>
+  <section class="section expertise-section" id="expertises">
+    <div class="container-page">
+      <div class="section-heading" data-reveal><p class="eyebrow">Des compétences complémentaires</p><h2 class="h-title">Nos domaines d’expertise</h2><p>De l’étude à la réalisation, des solutions adaptées à vos besoins.<br class="desktop-break" /> Un même engagement : la qualité, la sécurité et votre tranquillité.</p></div>
+      <div class="expertise-grid">{expertises.map((expertise, index) => <ExpertiseCard {...expertise} index={index} />)}</div>
+    </div>
+  </section>
+  <section class="section commitments-section">
+    <div class="container-page">
+      <div class="section-heading" data-reveal><p class="eyebrow">La confiance se construit</p><h2 class="h-title">Pourquoi choisir DATACOM&nbsp;?</h2><p>Des engagements concrets, du premier contact jusqu’à la réception des travaux.</p></div>
+      <div class="commitments-grid">{engagements.map(([titre, desc], i) => <article data-reveal style={`--reveal-delay:${i * 100}ms`}><span class="commitment-number" aria-hidden="true">0{i + 1}</span><h3>{titre}</h3><p>{desc}</p></article>)}</div>
+    </div>
+  </section>
+  <ProjectCTA />
+</BaseLayout>

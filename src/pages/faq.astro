@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCTA from '../components/ProjectCTA.astro';
+import { site } from '../data/site';
+const faqs = [
+  ['Comment demander un devis ?', 'Depuis notre page Contact ou par téléphone, une fois nos coordonnées renseignées. L’étude et le devis sont gratuits et sans engagement.'],
+  ['Quels sont vos délais d’intervention ?', 'Le délai dépend de la nature des travaux, de leur urgence et de nos disponibilités. Nous vous précisons le planning après avoir étudié votre demande.'],
+  ['Intervenez-vous en urgence ?', 'Contactez-nous pour décrire la situation. Nous évaluons votre besoin et vous confirmons nos possibilités d’intervention. En cas de danger immédiat, éloignez-vous de la zone à risque et contactez les services d’urgence compétents.'],
+  ['Travaillez-vous avec les professionnels ?', 'Oui. Nous accompagnons les particuliers et les professionnels avec des solutions adaptées à leurs locaux et à leurs usages.'],
+  ['Quelle est votre zone d’intervention ?', site.zoneTexte || 'Précisez la commune et l’adresse de votre projet lors de votre prise de contact. Nous vous confirmerons si nous pouvons intervenir sur place.'],
+  ['Quels sont vos domaines d’expertise ?', 'DATACOM intervient en électricité générale, en fibre optique et en plomberie, pour les installations neuves, les rénovations, le dépannage et la maintenance.'],
+  ['Le devis est-il gratuit ?', 'Oui, l’étude et le devis sont gratuits et sans engagement. Les prestations et leur coût vous sont présentés avant validation des travaux.'],
+  ['Comment se déroule un projet avec DATACOM ?', 'Nous commençons par écouter votre besoin, puis nous réalisons un diagnostic et établissons un devis. Après votre accord, nous planifions les travaux, réalisons les vérifications et assurons le suivi de votre installation.'],
+];
+---
+<BaseLayout title="Questions fréquentes" description="Devis, délais, zone d’intervention, électricité, fibre optique et plomberie : les réponses à vos questions sur DATACOM.">
+  <section class="page-intro"><div class="container-page"><p class="eyebrow">À votre écoute</p><h1 class="h-title">Questions fréquentes</h1><p>Des réponses claires pour préparer votre projet en toute confiance.</p></div></section>
+  <section class="section"><div class="container-page faq-wrap"><div class="faq-list">{faqs.map(([q,a]) => <details data-reveal><summary>{q.replace(/ \?/g, '\u00a0?')}</summary><p>{a}</p></details>)}</div></div></section>
+  <ProjectCTA />
+</BaseLayout>

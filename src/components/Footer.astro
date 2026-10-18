@@ -1,0 +1,50 @@
+---
+import { site } from '../data/site';
+import { withBase } from '../utils/paths';
+const annee = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="container-page footer-grid">
+    <div class="footer-brand">
+      <a href={withBase('/')} aria-label="DC GROUP — DATACOM, accueil"><img src={withBase('/logo-dc-group-light.png')} alt="DC GROUP" width="640" height="374" loading="lazy" /></a>
+      <p>DATACOM, l’énergie de vos projets.</p>
+      <p>Une entreprise à taille humaine, un accompagnement de bout en bout.</p>
+    </div>
+    <div>
+      <h2>Domaines d’intervention</h2>
+      <ul>
+        <li><a href={withBase('/electricite-generale')}>Électricité</a></li>
+        <li><a href={withBase('/fibre-optique')}>Fibre optique</a></li>
+        <li><a href={withBase('/plomberie')}>Plomberie</a></li>
+        <li><a href={withBase('/nos-services#particuliers')}>Particuliers</a></li>
+        <li><a href={withBase('/nos-services#professionnels')}>Professionnels</a></li>
+        <li><a href={withBase('/nos-services#maintenance')}>Dépannage et maintenance</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>Liens utiles</h2>
+      <ul>
+        <li><a href={withBase('/')}>Accueil</a></li>
+        <li><a href={withBase('/a-propos')}>À propos</a></li>
+        <li><a href={withBase('/nos-services')}>Nos services</a></li>
+        <li><a href={withBase('/faq')}>FAQ</a></li>
+        <li><a href={withBase('/contact')}>Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>Contact</h2>
+      <ul>
+        {site.telephone && <li><a href={`tel:${site.telephoneLien}`}>{site.telephone}</a></li>}
+        {site.email && <li><a href={`mailto:${site.email}`}>{site.email}</a></li>}
+        {site.adresse && <li>{site.adresse}</li>}
+        {site.horaires && <li>{site.horaires}</li>}
+        <li><a href={withBase('/contact')}>Parlons de votre projet</a></li>
+      </ul>
+      <a href={withBase('/contact')} class="footer-devis">Demander un devis <span aria-hidden="true">↗</span></a>
+    </div>
+  </div>
+  <div class="container-page footer-bottom">
+    <p>© {annee} {site.nomLegal}. Tous droits réservés.</p>
+    <div><a href={withBase('/mentions-legales')}>Mentions légales</a><a href={withBase('/politique-de-confidentialite')}>Politique de confidentialité</a></div>
+  </div>
+</footer>

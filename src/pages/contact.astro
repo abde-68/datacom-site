@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+import { withBase } from '../utils/paths';
+// URL publique d’un service de réception à configurer ; aucune clé privée ici.
+const endpoint = import.meta.env.PUBLIC_DEVIS_ENDPOINT || '';
+const configured = /^https:\/\//.test(endpoint);
+// Activer uniquement si le service et le forfait acceptent les pièces jointes.
+const photosEnabled = import.meta.env.PUBLIC_DEVIS_PHOTOS_ENABLED === 'true';
+---
+<BaseLayout title="Contact et demande de devis" description="Parlons de votre projet d’électricité, de fibre optique ou de plomberie. DATACOM vous accompagne avec une étude et un devis gratuits.">
+  <section class="page-intro"><div class="container-page"><p class="eyebrow">Le début de votre projet</p><h1 class="h-title">Parlons de vos besoins.</h1><p>Une question, des travaux ou un dépannage ? Construisons ensemble une solution adaptée.</p></div></section>
+  <section class="section"><div class="container-page contact-grid">
+    <div class="contact-info" id="coordonnees"><p class="eyebrow">Un interlocuteur unique</p><h2 class="h-title">À votre écoute,<br />à chaque étape.</h2><p>Expliquez-nous votre besoin, le lieu d’intervention et vos contraintes. Nous étudierons votre demande pour vous proposer un devis clair, gratuit et sans engagement.</p>
+      <ul>
+        {site.telephone && <li><strong>Téléphone :</strong> <a href={`tel:${site.telephoneLien}`}>{site.telephone}</a></li>}
+        {site.email && <li><strong>E-mail :</strong> <a href={`mailto:${site.email}`}>{site.email}</a></li>}
+        {site.adresse && <li><strong>Adresse :</strong> {site.adresse}</li>}
+        {site.horaires && <li><strong>Horaires :</strong> {site.horaires}</li>}
+      </ul>
+      {!site.telephoneLien && <p class="contact-note">Les coordonnées téléphoniques de DATACOM seront prochainement disponibles sur cette page.</p>}
+      <p>Électricité, fibre optique, plomberie : des compétences complémentaires pour simplifier vos travaux.</p>
+    </div>
+    <form id="devis-form" class="contact-form" method="post" action={configured ? endpoint : undefined} enctype="multipart/form-data" data-configured={String(configured)}>
+      <h2 class="text-xl font-semibold mb-3">Demander un devis</h2>
+      <p class="form-help">Tous les champs marqués d’un astérisque (*) sont obligatoires.</p>
+      {!configured && <p class="form-message mb-6">L’envoi du formulaire n’est pas encore activé. Aucune demande ne peut être transmise pour le moment.</p>}
+      <div class="form-grid">
+        <label>Nom *<input required name="nom" type="text" autocomplete="family-name" /></label>
+        <label>Prénom *<input required name="prenom" type="text" autocomplete="given-name" /></label>
+        <label>E-mail *<input required name="email" type="email" autocomplete="email" /></label>
+        <label>Téléphone *<input required name="telephone" type="tel" autocomplete="tel" /></label>
+        <label>Commune<input name="commune" type="text" autocomplete="address-level2" /></label>
+        <label>Type de service *<select required name="service"><option value="">Choisir un service</option><option value="electricite">Électricité</option><option value="fibre">Fibre optique</option><option value="plomberie">Plomberie</option></select></label>
+      </div>
+      <label>Niveau d’urgence<select name="urgence"><option value="normal">Projet à planifier</option><option value="rapide">Intervention souhaitée rapidement</option><option value="urgent">Demande urgente</option></select></label>
+      <label>Votre besoin *<textarea required name="message" rows="5"></textarea></label>
+      {photosEnabled && <label>Photos (facultatif)<span class="upload-picker"><span class="upload-button">Choisir des photos</span><span id="file-names">Aucune photo sélectionnée</span><input name="photos" type="file" accept="image/jpeg,image/png,image/webp" multiple aria-label="Photos (facultatif)" aria-describedby="file-names" /></span></label>}
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" hidden aria-hidden="true" />
+      <label class="consent"><input required type="checkbox" name="rgpd" /><span>J’accepte que mes données soient utilisées pour traiter ma demande, conformément à la <a href={withBase('/politique-de-confidentialite')}>politique de confidentialité</a>. *</span></label>
+      <button type="submit" class="btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed" disabled={!configured}>Envoyer ma demande</button>
+      <p id="form-message" class="form-message" role="status" aria-live="polite" hidden></p>
+      <noscript><p class="form-help mt-4">Le formulaire peut être envoyé sans JavaScript lorsque le service d’envoi est activé.</p></noscript>
+    </form>
+  </div></section>
+  <script>
+    const form = document.querySelector<HTMLFormElement>('#devis-form');
+    const msg = document.querySelector<HTMLElement>('#form-message');
+    const photos = form?.querySelector<HTMLInputElement>('input[name=photos]');
+    const fileNames = document.querySelector<HTMLElement>('#file-names');
+    photos?.addEventListener('change', () => {
+      if (fileNames) fileNames.textContent = photos.files?.length ? [...photos.files].map(file => file.name).join(', ') : 'Aucune photo sélectionnée';
+    });
+    form?.addEventListener('reset', () => { if (fileNames) fileNames.textContent = 'Aucune photo sélectionnée'; });
+    form?.addEventListener('submit', async event => {
+      event.preventDefault();
+      if (!msg || form.dataset.configured !== 'true' || !form.reportValidity()) return;
+      const honey = form.querySelector<HTMLInputElement>('input[name=_gotcha]');
+      if (honey?.value) return;
+      const button = form.querySelector<HTMLButtonElement>('button[type=submit]');
+      if (button) button.disabled = true;
+      msg.hidden = false;
+      msg.textContent = 'Envoi de votre demande en cours…';
+      try {
+        const response = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+        if (!response.ok) throw new Error('Envoi impossible');
+        msg.textContent = 'Votre demande a bien été transmise. Merci de votre confiance.';
+        form.reset();
+      } catch {
+        msg.textContent = 'Votre demande n’a pas pu être envoyée. Vos informations sont conservées dans le formulaire. Veuillez réessayer ou nous contacter par téléphone.';
+      } finally { if (button) button.disabled = false; }
+    });
+  </script>
+</BaseLayout>

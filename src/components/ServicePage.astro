@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ServiceCard from './ServiceCard.astro';
+import ProjectCTA from './ProjectCTA.astro';
+import { withBase } from '../utils/paths';
+import { methode } from '../data/services';
+interface Props { title: string; description: string; image: string; alt: string; introTitle: string; services: { titre: string; desc: string }[]; }
+const { title, description, image, alt, introTitle, services } = Astro.props;
+---
+<BaseLayout title={title} description={description}>
+  <section class="service-hero">
+    <img src={withBase('/images/hero-accueil.webp')} alt="Plans techniques et outils de préparation d’un projet sur un bureau." width="1376" height="768" fetchpriority="high" />
+    <div class="container-page"><div class="service-title" data-hero="1"><p class="eyebrow">Nos domaines d’expertise</p><h1>{title}</h1></div></div>
+  </section>
+  <section class="section"><div class="container-page split-grid">
+    <div class="story-copy" data-reveal><p class="eyebrow">L’expertise DATACOM</p><h2 class="h-title">{introTitle}</h2><slot /><a href={withBase('/contact')} class="btn-secondary">Étude et devis gratuits <span aria-hidden="true">↗</span></a></div>
+    <img src={withBase(`/images/${image}.webp`)} alt={alt} width="1200" height="896" loading="lazy" class="rounded-photo" data-reveal />
+  </div></section>
+  <section class="section commitments-section"><div class="container-page"><div class="section-heading" data-reveal><p class="eyebrow">Des solutions sur mesure</p><h2 class="h-title">Nos prestations</h2><p>Pour vos installations neuves, vos rénovations et vos besoins de dépannage.</p></div><div class="prestation-grid">{services.map(s => <ServiceCard {...s} />)}</div></div></section>
+  <section class="section"><div class="container-page"><div class="section-heading" data-reveal><p class="eyebrow">Un accompagnement de bout en bout</p><h2 class="h-title">Comment se déroule votre projet&nbsp;?</h2></div><ol class="method-grid">{methode.map(([titre, desc], i) => <li data-reveal><span class="step-number">0{i+1}</span><h3>{titre}</h3><p>{desc}</p></li>)}</ol><p class="service-faq-link">Une question sur nos interventions ? <a href={withBase('/faq')} class="text-link">Consultez notre FAQ <span aria-hidden="true">↗</span></a></p></div></section>
+  <ProjectCTA />
+</BaseLayout>

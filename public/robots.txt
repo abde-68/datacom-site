@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Remplacez par votre domaine definitif
+Sitemap: https://abde-68.github.io/datacom-site/sitemap-index.xml

@@ -1,0 +1,9 @@
+---
+import { withBase } from '../utils/paths';
+interface Props { titre: string; desc: string; href: string; image: string; alt: string; index?: number; }
+const { titre, desc, href, image, alt, index = 0 } = Astro.props;
+---
+<article class="expertise-card" data-reveal style={`--reveal-delay:${index * 120}ms`}>
+  <a class="expertise-image" href={withBase(href)} aria-label={`Découvrir notre expertise : ${titre}`}><img src={withBase(`/images/${image}.webp`)} alt={alt} width="1200" height="896" loading="lazy" decoding="async" /></a>
+  <div class="expertise-body"><h3>{titre}</h3><p>{desc}</p><a href={withBase(href)} class="btn-service" aria-label={`En savoir plus sur ${titre === 'Électricité' ? 'l’électricité' : titre === 'Plomberie' ? 'la plomberie' : 'la fibre optique'}`}>En savoir plus <span aria-hidden="true">↗</span></a></div>
+</article>

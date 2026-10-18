@@ -1,0 +1,50 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CallButton from '../components/CallButton.astro';
+import Motion from '../components/Motion.astro';
+import { site } from '../data/site';
+import { withBase } from '../utils/paths';
+interface Props { title: string; description: string; canonical?: string; }
+const { title, description, canonical } = Astro.props;
+const fullTitle = `${title} | ${site.nomCommercial}`;
+const canonicalUrl = new URL(canonical ?? Astro.url.pathname, Astro.site ?? Astro.url.origin).href;
+const imageUrl = new URL(withBase('/images/hero-accueil.webp'), Astro.site ?? Astro.url.origin).href;
+---
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
+    <meta name="theme-color" content="#0A4FFF" />
+    <link rel="preload" href={withBase('/fonts/open-sans-400.woff2')} as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href={withBase('/fonts/open-sans.css')} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={imageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org', '@type': 'Electrician', name: site.nomLegal, description,
+      ...(site.telephone ? { telephone: site.telephone } : {}),
+      ...(site.email ? { email: site.email } : {}),
+      ...(site.adresse ? { address: site.adresse } : {}),
+      ...(site.villes.length ? { areaServed: site.villes } : {}),
+    }).replace(/</g, '\\u003c')} />
+  </head>
+  <body>
+    <a href="#contenu" class="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-50 focus:rounded focus:bg-white focus:px-4 focus:py-2">Aller au contenu</a>
+    <Header />
+    <main id="contenu"><slot /></main>
+    <Footer />
+    <CallButton />
+    <Motion />
+  </body>
+</html>
