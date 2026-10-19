@@ -1,15 +1,182 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { site } from '../data/site';
+
+const email = 'a.kadaoui@datacom-ingenierie.com';
 ---
-<BaseLayout title="Politique de confidentialité" description="Informations sur le traitement des données personnelles et l’exercice de vos droits auprès de DATACOM SASU.">
-  <section class="section"><div class="container-page legal-content"><p class="eyebrow">Vos données personnelles</p><h1 class="h-title">Politique de confidentialité</h1>
-    <p class="mt-6">Lorsque le service d’envoi est activé, les données renseignées dans le formulaire de contact (nom, prénom, e-mail, téléphone, commune, service, urgence, description du besoin et photos éventuelles) sont utilisées pour traiter votre demande de devis et vous recontacter.</p>
-    <h2>Responsable du traitement</h2><p>{site.nomLegal} est responsable du traitement des demandes. {site.email ? `Contact : ${site.email}.` : 'Les coordonnées de contact doivent être renseignées avant l’activation du formulaire.'}</p>
-    <h2>Finalité et base légale</h2><p>Le traitement vise à répondre à votre demande et à préparer un éventuel contrat de prestation. Il repose sur les mesures précontractuelles prises à votre demande. Les informations obligatoires sont signalées dans le formulaire.</p>
-    <h2>Destinataires et conservation</h2><p>Les données sont destinées aux personnes habilitées de DATACOM et, lorsque le formulaire est activé, au prestataire chargé de transmettre les demandes. Le prestataire, les éventuels transferts de données et la durée de conservation doivent être précisés avant l’activation du service.</p>
-    <h2>Vos droits</h2><p>Conformément au RGPD, vous disposez notamment de droits d’accès, de rectification, d’effacement et de limitation du traitement, dans les conditions prévues par la réglementation. Vous pouvez également introduire une réclamation auprès de la CNIL.</p>
-    <h2>Illustrations</h2><p>Les photographies du site sont des illustrations générées par intelligence artificielle. Elles ne présentent pas des membres de l’équipe ni des chantiers réalisés par DATACOM.</p>
-    <p class="contact-note">Cette politique doit être complétée et validée avec les informations réelles de l’entreprise et du service d’envoi avant la mise en production.</p>
-  </div></section>
+
+<BaseLayout
+  title="Politique de confidentialité"
+  description="Découvrez comment DATACOM utilise les coordonnées et les photos transmises dans le cadre des demandes de contact et de devis."
+>
+  <section class="section">
+    <div class="container-page legal-content">
+      <p class="eyebrow">Protection de vos données</p>
+      <h1 class="h-title">Politique de confidentialité</h1>
+
+      <p class="mt-6">
+        DATACOM utilise les informations que vous transmettez pour comprendre
+        votre projet, répondre à vos questions et préparer votre demande de
+        devis. Cette page présente les données concernées, leur utilisation
+        et les moyens d’exercer vos droits.
+      </p>
+
+      <h2>1. Responsable du traitement</h2>
+      <p>
+        Le responsable du traitement est <strong>{site.nomLegal}</strong>.
+      </p>
+      <p>
+        Adresse du siège :
+        {site.adresse || '[47 rue Vivienne 75002 Paris ]'}
+      </p>
+      <p>
+        Pour toute question concernant vos données :
+        <a href={`mailto:${email}`}>{email}</a>.
+      </p>
+
+      <h2>2. Données recueillies</h2>
+      <p>
+        Selon les informations renseignées dans le formulaire, nous recevons
+        vos nom et prénom, votre adresse e-mail, votre numéro de téléphone,
+        votre commune, le type de prestation souhaitée, le niveau d’urgence,
+        la description de votre besoin et les photos que vous choisissez
+        de joindre.
+      </p>
+      <p>
+        Les champs obligatoires sont signalés par un astérisque.
+        Sans ces informations, le formulaire ne peut pas être envoyé.
+        L’ajout de photos est facultatif.
+      </p>
+      <p>
+        Les prestataires techniques peuvent également traiter des données
+        de connexion, notamment l’adresse IP, pour assurer le fonctionnement
+        et la sécurité de leurs services.
+      </p>
+
+      <h2>3. Utilisation de vos informations</h2>
+      <p>Vos informations sont utilisées pour :</p>
+      <ul>
+        <li>Comprendre votre besoin et évaluer les travaux envisagés.</li>
+        <li>Vous recontacter par téléphone ou par e-mail.</li>
+        <li>Préparer et vous transmettre un devis.</li>
+        <li>Assurer le suivi de vos échanges avec DATACOM.</li>
+      </ul>
+      <p>
+        Les demandes de devis sont traitées sur la base des mesures
+        précontractuelles prises à votre demande. Les autres demandes
+        de renseignements reposent sur notre intérêt légitime à répondre
+        aux personnes qui nous contactent.
+      </p>
+      <p>
+        Les données du formulaire ne sont pas utilisées pour vous inscrire
+        automatiquement à une newsletter ou à des campagnes publicitaires.
+      </p>
+
+      <h2>4. Photos de chantier</h2>
+      <p>
+        Les photos servent uniquement à comprendre votre installation,
+        les contraintes du chantier et les travaux souhaités.
+        Leur envoi ne vaut pas autorisation de publication.
+      </p>
+      <p>
+        Évitez de transmettre des visages, plaques d’immatriculation,
+        documents d’identité, informations confidentielles ou éléments
+        permettant d’identifier inutilement des tiers.
+        Recadrez ou masquez ces éléments avant l’envoi.
+      </p>
+
+      <h2>5. Destinataires et prestataires</h2>
+      <p>
+        Les demandes sont accessibles aux personnes habilitées de DATACOM
+        chargées de leur traitement.
+      </p>
+      <p>
+        Le formulaire utilise <strong>FormSubmit</strong> pour transmettre
+        les messages et les pièces jointes à notre adresse professionnelle.
+      </p>
+      <p>
+        FormSubmit peut présenter un contrôle anti-spam ou un CAPTCHA
+        lors de l’envoi. Les conditions de ses services et des outils
+        associés s’appliquent également.
+      </p>
+      <p>
+        Pour consulter les informations de FormSubmit :
+        <a href="https://formsubmit.co/privacy.pdf">
+          politique de confidentialité du prestataire
+        </a>.
+      </p>
+
+     <h2>6. Éventuels transferts hors de l’Union européenne</h2>
+<p>
+  DATACOM veille à la protection de vos données personnelles conformément
+  au RGPD, y compris lors du recours à des prestataires techniques.
+  Tout transfert de données hors de l’Union européenne doit reposer
+  sur un mécanisme autorisé par la réglementation, tel qu’une décision
+  d’adéquation ou des garanties appropriées.
+</p>
+<p>
+  Pour obtenir des informations sur les prestataires utilisés, les lieux
+  de traitement et les garanties applicables à vos données, vous pouvez
+  nous contacter à
+  <a href="mailto:contact@datacom-ingenierie.com">
+    a.kadaoui@datacom-ingenierie.com
+  </a>.
+</p>
+
+      <h2>7. Durée de conservation</h2>
+      <p>
+        Pour les demandes ne donnant pas lieu à une prestation, DATACOM
+        conserve les échanges et les photos utiles pendant une durée
+        maximale de 12 mois à compter du dernier échange, puis les supprime,
+        sauf nécessité de conserver certains éléments pour défendre un droit.
+      </p>
+      <p>
+        Si une prestation est conclue, les informations nécessaires rejoignent
+        le dossier client. Elles sont alors conservées pendant les durées
+        nécessaires à l’exécution du contrat, aux garanties, au respect
+        des obligations légales et à la gestion d’éventuels litiges.
+        Les photos devenues inutiles sont supprimées.
+      </p>
+      <p>
+        Ces durées concernent les données gérées par DATACOM.
+        Les durées techniques propres aux prestataires sont décrites
+        dans leurs conditions et politiques de confidentialité.
+      </p>
+
+      <h2>8. Vos droits</h2>
+      <p>
+        Dans les conditions prévues par la réglementation, vous pouvez
+        demander l’accès à vos données, leur rectification, leur effacement
+        ou la limitation de leur traitement. Vous disposez également
+        d’un droit à la portabilité lorsque ses conditions sont réunies.
+      </p>
+      <p>
+        Pour les traitements fondés sur notre intérêt légitime, vous pouvez
+        exercer votre droit d’opposition pour des raisons tenant à votre
+        situation particulière.
+      </p>
+      <p>
+        Pour exercer vos droits, écrivez à
+        <a href={`mailto:${email}`}>{email}</a>
+        en précisant votre demande. Si un doute raisonnable existe sur
+        votre identité, des informations complémentaires pourront être
+        demandées.
+      </p>
+      <p>
+        Une réponse vous sera apportée en principe dans un délai d’un mois.
+        Ce délai peut être prolongé dans les cas prévus par la réglementation ;
+        vous en serez alors informé.
+      </p>
+      <p>
+        Vous pouvez également adresser une réclamation à la
+        <a href="https://www.cnil.fr/fr/plaintes">CNIL</a>.
+      </p>
+
+      <h2>9. Mise à jour de cette politique</h2>
+      <p>
+        Cette politique est adaptée en cas de modification du formulaire,
+        des finalités du traitement ou des prestataires utilisés.
+      </p>
+    </div>
+  </section>
 </BaseLayout>
