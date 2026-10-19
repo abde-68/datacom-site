@@ -1,8 +1,57 @@
 ---
 import ServicePage from '../components/ServicePage.astro';
-import { electricite } from '../data/services';
+
+const electricite = [
+  {
+    titre: 'Installation électrique neuve',
+    desc: 'Conception et pose complète de votre installation électrique pour les constructions neuves.',
+  },
+  {
+    titre: 'Rénovation électrique',
+    desc: 'Remise à neuf de vos installations anciennes pour plus de confort et de sécurité.',
+  },
+  {
+    titre: 'Mise aux normes',
+    desc: 'Mise en conformité de votre installation avec la norme NF C 15-100, selon les travaux prévus.',
+  },
+  {
+    titre: 'Diagnostic électrique',
+    desc: 'Contrôle de votre installation pour identifier les anomalies et les améliorations nécessaires.',
+  },
+];
 ---
-<ServicePage title="Électricité" description="Installation électrique, rénovation, mise aux normes et dépannage : DATACOM accompagne particuliers et professionnels. Étude et devis gratuits." image="carte-electricite" alt="Électricien câblant un tableau électrique moderne avec des fils soigneusement organisés." introTitle="Des installations fiables, en toute sécurité." services={electricite}>
-  <p>De l’installation neuve au dépannage, DATACOM prend en charge vos besoins en <strong>électricité générale</strong>, pour votre logement comme pour vos locaux professionnels.</p>
-  <p>Nous concevons des solutions adaptées à vos usages, avec une attention particulière portée à la <strong>sécurité</strong>, à la conformité aux normes et à la qualité des finitions. Du diagnostic à la mise en service, vous savez où en est votre projet.</p>
+
+<ServicePage
+  title="Électricité"
+  description="Installation électrique neuve, rénovation, mise aux normes et diagnostic électrique : DATACOM accompagne particuliers et professionnels. Étude et devis gratuits."
+  image="carte-electricite"
+  alt="Électricien câblant un tableau électrique moderne avec des fils soigneusement organisés."
+  introTitle="Des installations fiables, en toute sécurité."
+  services={electricite}
+>
+  <p>
+    DATACOM accompagne les particuliers et les professionnels pour leurs
+    projets d’<strong>installation électrique neuve</strong>, de
+    <strong>rénovation</strong>, de <strong>mise aux normes</strong> et de
+    <strong>diagnostic électrique</strong>.
+  </p>
+
+  <p>
+    Nous concevons des solutions adaptées à vos usages, avec une attention
+    particulière portée à la <strong>sécurité</strong>, à la conformité aux
+    normes et à la qualité des finitions. Du diagnostic à la mise en service,
+    vous savez où en est votre projet.
+  </p>
 </ServicePage>
+
+<style>
+  :global(body .prestation-grid) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: 480px) {
+    :global(body .prestation-grid) {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
