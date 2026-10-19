@@ -18,7 +18,21 @@ const photosEnabled = import.meta.env.PUBLIC_DEVIS_PHOTOS_ENABLED === 'true';
         {site.adresse && <li><strong>Adresse :</strong> {site.adresse}</li>}
         {site.horaires && <li><strong>Horaires :</strong> {site.horaires}</li>}
       </ul>
-      {!site.telephoneLien && <p class="contact-note">Les coordonnées téléphoniques de DATACOM seront prochainement disponibles sur cette page.</p>}
+      <div class="contact-note">
+  <p>
+    <strong>Téléphone :</strong><br />
+    <a href="tel:+33767067967">
+      07 67 06 79 67
+    </a>
+  </p>
+
+  <p>
+    <strong>E-mail :</strong><br />
+    <a href="mailto:a.kadaoui@datacom-ingenierie.com">
+      a.kadaoui@datacom-ingenierie.com
+    </a>
+  </p>
+</div>
       <p>Électricité, fibre optique, plomberie : des compétences complémentaires pour simplifier vos travaux.</p>
     </div>
     <form id="devis-form" class="contact-form" method="post" action={configured ? endpoint : undefined} enctype="multipart/form-data" data-configured={String(configured)}>
