@@ -2,9 +2,52 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { site } from '../data/site';
 
+// COORDONNÉES À PERSONNALISER :
+const email = 'a.kadaoui@datacom-ingenierie.com';
+const telephone = '33767067967';
+const adresse = '47 rue vivienne 75002 PARIS';
+
+// INFORMATIONS LÉGALES À COMPLÉTER :
 ---
-<BaseLayout title="Mentions légales" description="Mentions légales et informations relatives à l’éditeur du site DATACOM SASU.">
-  <section class="section"><div class="container-page legal-content"><p class="eyebrow">Informations légales</p><h1 class="h-title">Mentions légales</h1><p class="mt-6">Éditeur du site : {site.nomLegal}</p><ul>
-    <li>Adresse : {site.adresse || aRenseigner}</li><li>Téléphone : {site.telephone || +33767067967}</li><li>E-mail : {site.email || a.kadaoui@datacom-ingenierie.com}</li><li>SIRET : {site.siret || 10956085400019}</li>
-  </ul><p class="contact-note">Ces informations doivent être complétées avec les données légales réelles de l’entreprise avant toute mise en production.</p></div></section>
+
+<BaseLayout
+  title="Mentions légales"
+  description="Informations légales et coordonnées de DATACOM."
+>
+  <section class="section">
+    <div class="container-page legal-content">
+      <p class="eyebrow">Informations légales</p>
+      <h1 class="h-title">Mentions légales</h1>
+
+      <h2>Éditeur du site</h2>
+      <ul>
+        <li>
+          <strong>Raison sociale :</strong>
+          {site.nomLegal}
+        </li>
+        <li>
+          <strong>Adresse du siège :</strong>
+          {adresse}
+        </li>
+        <li>
+          <strong>SIRET :</strong>
+          {site.siret || '10956085400019'}
+        </li>
+
+      </ul>
+
+      <h2>Contact</h2>
+      <ul>
+        <li>
+          <strong>Téléphone :</strong>
+          {telephone}
+        </li>
+        <li>
+          <strong>E-mail :</strong>
+          <a href={`mailto:${email}`}>{email}</a>
+        </li>
+      </ul>
+
+    </div>
+  </section>
 </BaseLayout>
